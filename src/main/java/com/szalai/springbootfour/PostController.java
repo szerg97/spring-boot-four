@@ -11,13 +11,16 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final SmsSender smsSender;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, SmsSender smsSender) {
         this.postService = postService;
+        this.smsSender = smsSender;
     }
 
     @GetMapping
     public List<Post> getAllPosts() {
+        smsSender.send("hello world");
         return postService.getPosts();
     }
 }
